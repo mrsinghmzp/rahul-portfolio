@@ -1,0 +1,491 @@
+/* ─── Liquid Glass Segmented Bar (Header) ────────────────────────── */
+.liquid-glass-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 6px;
+  border-radius: 100px;
+  position: relative;
+  
+  /* Liquid Glass Core: Layered Translucency & High Saturation Blur */
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.14) 0%,
+    rgba(255, 255, 255, 0.04) 40%,
+    rgba(0, 0, 0, 0.28) 100%
+  );
+  backdrop-filter: blur(24px) saturate(190%) contrast(105%);
+  -webkit-backdrop-filter: blur(24px) saturate(190%) contrast(105%);
+  
+  /* Specular Refractive Borders */
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-top: 1px solid rgba(255, 255, 255, 0.45);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  
+  /* Liquid Inner & Drop Shadows */
+  box-shadow:
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -1px 2px 0 rgba(0, 0, 0, 0.4),
+    0 12px 36px 0 rgba(0, 0, 0, 0.45),
+    0 0 24px var(--accent-glow);
+  
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.liquid-glass-bar:hover {
+  border-top-color: rgba(255, 255, 255, 0.6);
+  box-shadow:
+    inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -1px 2px 0 rgba(0, 0, 0, 0.4),
+    0 16px 40px 0 rgba(0, 0, 0, 0.5),
+    0 0 32px var(--accent-glow);
+}
+
+.theme-pill-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 14px;
+  border-radius: 100px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.25s ease, transform 0.25s ease;
+  z-index: 1;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.theme-pill-btn:hover {
+  color: var(--white);
+  transform: translateY(-1px);
+}
+
+.theme-pill-btn--active {
+  color: var(--white);
+  font-weight: 600;
+}
+
+.theme-pill-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  line-height: 1;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
+}
+
+.theme-pill-btn--active .theme-pill-icon {
+  color: var(--white);
+  filter: drop-shadow(0 0 8px currentColor);
+  transform: scale(1.15);
+}
+
+/* Fluid Liquid Droplet Indicator */
+.theme-pill-liquid-indicator {
+  position: absolute;
+  inset: 0;
+  border-radius: 100px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.32) 0%,
+    rgba(255, 255, 255, 0.1) 45%,
+    rgba(255, 255, 255, 0.2) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-top: 1px solid rgba(255, 255, 255, 0.75);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow:
+    inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.7),
+    inset 0 -1.5px 3px 0 rgba(0, 0, 0, 0.3),
+    0 4px 20px var(--accent-glow);
+  z-index: -1;
+  overflow: hidden;
+}
+
+/* Liquid Gloss Sheen on the Pill */
+.theme-pill-liquid-indicator::before {
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: 14%;
+  right: 14%;
+  height: 42%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.65) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  border-radius: 100px 100px 60px 60px;
+  pointer-events: none;
+}
+
+.theme-pill-btn-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* ─── iOS Fluid Water Drop Tooltip ───────────────────────────────── */
+.water-drop-anchor {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 600;
+  display: flex;
+  justify-content: center;
+}
+
+.water-drop-anchor--compact {
+  top: auto;
+  bottom: calc(100% + 14px);
+  left: 0;
+  transform: none;
+}
+
+.water-drop-tooltip {
+  position: relative;
+  transform-origin: 50% 0%;
+  pointer-events: none;
+  
+  /* Apple VisionOS / iOS Liquid Glass Material */
+  background: radial-gradient(
+    135% 120% at 30% 12%,
+    rgba(255, 255, 255, 0.36) 0%,
+    rgba(255, 255, 255, 0.1) 36%,
+    rgba(12, 22, 38, 0.84) 85%,
+    rgba(6, 12, 22, 0.96) 100%
+  );
+  backdrop-filter: blur(40px) saturate(220%) contrast(105%);
+  -webkit-backdrop-filter: blur(40px) saturate(220%) contrast(105%);
+  
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-top: 1.5px solid rgba(255, 255, 255, 0.88);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 22px; /* iOS Continuous Squircle */
+  
+  box-shadow:
+    0 24px 50px -6px rgba(0, 0, 0, 0.65),
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.75),
+    inset 0 -1.5px 3px rgba(0, 0, 0, 0.35),
+    0 0 30px var(--accent-glow);
+    
+  will-change: transform, opacity, filter;
+}
+
+.water-drop-tooltip--compact {
+  transform-origin: 24px 100%;
+}
+
+/* Water Drop Tail pointing UP toward header pill button */
+.water-drop-tail {
+  position: absolute;
+  top: -7px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 8px;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 255, 255, 0.4) 100%
+  );
+  filter: drop-shadow(0 -1px 3px rgba(255, 255, 255, 0.7));
+}
+
+/* Water Drop Tail pointing DOWN (for compact bottom switcher) */
+.water-drop-tail--bottom {
+  top: auto;
+  bottom: -7px;
+  left: 30px;
+  transform: none;
+  clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(255, 255, 255, 0.95) 100%
+  );
+}
+
+/* Surface gloss curve across top of water droplet */
+.water-drop-sheen {
+  position: absolute;
+  top: 2px;
+  left: 14%;
+  right: 14%;
+  height: 38%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.7) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  border-radius: 100px 100px 50px 50px;
+  pointer-events: none;
+}
+
+/* Floating micro water droplet bead */
+.water-drop-bead {
+  position: absolute;
+  bottom: -9px;
+  right: 18px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 35% 35%,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(56, 189, 248, 0.7) 50%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+  box-shadow: 0 0 10px var(--accent-glow);
+  animation: beadFloat 2.6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes beadFloat {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%       { transform: translateY(2.5px) scale(0.92); }
+}
+
+/* Tooltip Content inside the water droplet */
+.water-drop-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 11px 18px;
+  text-align: center;
+  min-width: 200px;
+  max-width: 260px;
+  white-space: normal;
+}
+
+.water-drop-tag {
+  font-family: var(--font-display);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  text-shadow: 0 0 10px currentColor;
+}
+
+.water-drop-desc {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.45;
+  color: #f1f5f9;
+  letter-spacing: 0.01em;
+}
+
+/* ─── Floating Compact Quick Toggle ────────────────────────────────── */
+.theme-floating-widget {
+  position: fixed;
+  bottom: 28px;
+  left: 28px;
+  z-index: 300;
+}
+
+.theme-toggle-compact-wrap {
+  position: relative;
+}
+
+.liquid-glass-btn.theme-quick-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 20px;
+  border-radius: 100px;
+  
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.16) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(0, 0, 0, 0.35) 100%
+  );
+  backdrop-filter: blur(24px) saturate(190%);
+  -webkit-backdrop-filter: blur(24px) saturate(190%);
+  
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  
+  box-shadow:
+    inset 0 1px 1.5px rgba(255, 255, 255, 0.45),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.3),
+    0 10px 32px rgba(0, 0, 0, 0.5),
+    0 0 24px var(--accent-glow);
+  
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.liquid-glass-btn.theme-quick-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  border-top-color: rgba(255, 255, 255, 0.7);
+  box-shadow:
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.6),
+    0 14px 40px rgba(0, 0, 0, 0.6),
+    0 0 35px var(--accent-glow);
+}
+
+.theme-quick-icon {
+  display: inline-flex;
+  align-items: center;
+  font-size: 17px;
+  line-height: 1;
+  filter: drop-shadow(0 0 8px currentColor);
+}
+
+.theme-palette-icon {
+  font-size: 13px;
+  color: var(--accent-green);
+  margin-left: 2px;
+  transition: transform 0.3s ease;
+}
+
+.liquid-glass-btn.theme-quick-btn:hover .theme-palette-icon {
+  transform: rotate(20deg);
+}
+
+/* ─── Liquid Glass Dropdown Menu ───────────────────────────────────── */
+.liquid-glass-panel.theme-dropdown-menu {
+  position: absolute;
+  bottom: calc(100% + 14px);
+  left: 0;
+  width: 260px;
+  padding: 12px;
+  border-radius: 20px;
+  
+  background: linear-gradient(
+    135deg,
+    rgba(20, 32, 26, 0.88) 0%,
+    rgba(10, 18, 14, 0.94) 100%
+  );
+  backdrop-filter: blur(28px) saturate(200%);
+  -webkit-backdrop-filter: blur(28px) saturate(200%);
+  
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-top: 1px solid rgba(255, 255, 255, 0.45);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  
+  box-shadow:
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.35),
+    0 24px 60px rgba(0, 0, 0, 0.75),
+    0 0 35px var(--accent-glow);
+  
+  z-index: 500;
+}
+
+.theme-dropdown-header {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  padding: 4px 10px 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.theme-dropdown-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.theme-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--white);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  width: 100%;
+}
+
+.theme-dropdown-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.14);
+  transform: translateX(3px);
+}
+
+.theme-dropdown-item.active {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.18) 0%,
+    rgba(255, 255, 255, 0.06) 100%
+  );
+  border: 1px solid var(--accent-green);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.3), 0 0 14px var(--accent-glow);
+}
+
+.theme-item-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 6px currentColor);
+}
+
+.theme-item-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.theme-item-name {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--white);
+}
+
+.theme-item-desc {
+  font-size: 11px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.theme-item-check {
+  font-size: 13px;
+  color: var(--accent-green);
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 6px var(--accent-green));
+}
+
+@media (max-width: 768px) {
+  .theme-pill-bar {
+    display: none;
+  }
+  .theme-floating-widget {
+    display: none !important;
+  }
+}

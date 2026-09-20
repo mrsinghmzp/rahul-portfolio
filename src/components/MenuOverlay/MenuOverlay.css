@@ -1,0 +1,108 @@
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: var(--accent);
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-close {
+  position: absolute;
+  top: 28px; right: 32px;
+  width: 48px; height: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  background: rgba(255,255,255,0.15);
+  border-radius: 50%;
+}
+
+.menu-close span {
+  display: block;
+  width: 20px;
+  height: 1.5px;
+  background: var(--white);
+  border-radius: 2px;
+  position: absolute;
+}
+.menu-close span:first-child { transform: rotate(45deg); }
+.menu-close span:last-child  { transform: rotate(-45deg); }
+
+.menu-overlay-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 100px 80px 60px;
+}
+
+.menu-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.menu-nav-item {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+  overflow: hidden;
+}
+
+.menu-nav-index {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.08em;
+  min-width: 30px;
+}
+
+.menu-nav-link {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 8vw, 96px);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  transition: opacity 0.3s, letter-spacing 0.4s;
+}
+
+.menu-nav-link:hover {
+  opacity: 0.6;
+  letter-spacing: 0.02em;
+}
+
+.menu-social {
+  display: flex;
+  gap: 32px;
+  padding-top: 40px;
+}
+
+.menu-social-link {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: rgba(255,255,255,0.7);
+  letter-spacing: 0.03em;
+  transition: color 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.menu-social-link:hover { color: var(--white); }
+
+.menu-social-icon {
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .menu-overlay-inner { padding: 80px 24px 40px; }
+  .menu-social { flex-wrap: wrap; gap: 20px; }
+  .menu-close { top: 16px; right: 16px; }
+}

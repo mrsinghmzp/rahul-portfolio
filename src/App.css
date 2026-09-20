@@ -1,0 +1,100 @@
+/* ─── App-level Shared Styles ───────────────────────────────────── */
+
+/* Section label */
+.section-label {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  margin-bottom: 64px;
+}
+
+/* Magnetic Button Base */
+.magnetic-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 40px;
+  border-radius: 100px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  overflow: hidden;
+  transition: transform 0.3s var(--ease-out);
+  will-change: transform;
+  cursor: none;
+}
+
+.magnetic-btn--outline {
+  border: 1px solid rgba(255,255,255,0.25);
+  color: var(--white);
+  background: transparent;
+}
+
+.magnetic-btn--outline::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--white);
+  border-radius: inherit;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s var(--ease-out);
+}
+
+.magnetic-btn--outline:hover::before { transform: scaleX(1); }
+.magnetic-btn--outline:hover span { color: var(--bg); }
+.magnetic-btn--outline span { position: relative; z-index: 1; transition: color 0.3s; }
+
+.magnetic-btn--accent {
+  background: var(--accent);
+  color: var(--white);
+  border: 1px solid var(--accent);
+}
+
+.magnetic-btn--accent::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #2d3fc7;
+  border-radius: inherit;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s var(--ease-out);
+}
+
+.magnetic-btn--accent:hover::before { transform: scaleX(1); }
+.magnetic-btn--accent span { position: relative; z-index: 1; }
+
+/* Reveal animation */
+.reveal-hidden {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+}
+
+main {
+  overflow-x: clip;
+  max-width: 100%;
+  width: 100%;
+}
